@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert New Device</title>
+<link href="assets/css/my-style.css" rel="stylesheet">
+<link href="assets/css/modify.css" rel="stylesheet">
+<meta charset="utf-8">
+</head>
+
+<?php
+    include("assets/php/functions.php");
+    $dblink = db_iconnect("inventory");
+
+    // start benchmark
+    $time_start = microtime(true);
+
+    if (isset($_POST['submit'])) {
+        $type=urlencode($_POST['type']);
+        $manu=urlencode($_POST['manufacturer']);
+        $serial=urlencode($_POST['serial-num']);
+
+        // initiate cURL command
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://ec2-3-16-113-76.us-east-2.compute.amazonaws.com/api/insert?type=$type&manufacturer=$manu&serial-num=$serial",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_SSL_VERIFYPEER => false
+        ));
+
+        // execute cURL command
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        if ($err) {
+            echo "<h3> Error Search API #: $err";
+            die();
+        }
+        else {
+            $results = json_decode($response, true);
+            $tmp = explode(":", $results[0]);
+            $status = trim($tmp[1]);
+
+            if ($status == "SUCCESS") {
+                $tmp = explode(":", $results[1]);
+                $msg = trim($tmp[1]);
+                $content = explode(",", $msg);
+
+                echo "<h3> Successfully inserted device. </h3>";
+                echo "<p>Type: $content[0]</p>";
+                echo "<p>Manufacturer: $content[1]</p>";
+                echo "<p>Serial #: $content[2]</p>";
+
+                $tmp = explode(":", $results[2]);
+                $execution_time = trim($tmp[1]);
+
+                echo "<p>Serial #: $execution_time</p>";
+            }
+        }
+    }
+?>
+
+
+
+<body>
+<h2>Insert New Device</h2>
+<form method="POST">
+    <div class="row">
+    <div class="column">
+        <label for="type-drop-select" id="type-drop">Select Type:</label>
+        <select name="type" id="type-drop-select" size="8" onchange="">
+        <option value="select-all" selected>(SELECT ALL)</option>
+<?php
+        $type_query = "SELECT * FROM `type` ORDER BY `name` ";
+        $type_results = $dblink->query($type_query) or 
+            die("Something went wrong with $type_queryl <br>".$dblink->error);
+
+        while ($type_list = $type_results->fetch_array(MYSQLI_ASSOC)) {
+?>              
+            <option value="<?=$type_list['name']?>"><?=$type_list['name']?><?=$type_list['status'] == "inactive" ? " (inactive)" : ""?></option>    <?php
+        } // end of while loop
+?>
+        </select>
+    </div> <!-- end of column -->
+
+    <div class="column">
+        <label for="manu-drop-select" id="manu-drop">Select Manufacturer:</label>
+        <select name="manufacturer" id="manu-drop-select" size="8" onchange="">
+        <option value="select-all" selected>(SELECT ALL)</option>
+<?php
+        $manu_query = "SELECT * FROM `manufacturer` ORDER BY `name`";
+        $manu_results = $dblink->query($manu_query) or 
+        die("Something went wrong with $manu_query <br>".$dblink->error);
+
+        while ($manu_list = $manu_results->fetch_array(MYSQLI_ASSOC)) {
+?>                  
+            <option value="<?=$manu_list['name']?>"><?=$manu_list['name']?><?=$manu_list['status'] == "inactive" ? " (inactive)" : ""?></option>    <?php
+        }   // end of while loop
+        ?>
+        </select>
+    </div> <!-- end of column -->
+    <div class="column">
+        <label for="serial-num-field">Serial #: </label>
+        <input name="serial-num" id="serial-num-field" type="text" required>
+    </div>
+    </div> <!-- end of row -->
+
+    <div class="row">
+        <input class="column" type="submit" name="submit" id="submit-button">
+    </div>
+</form>
+</body>
+<script src="assets/js/my-script.js" type="text/javascript"></script>

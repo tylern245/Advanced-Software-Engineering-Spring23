@@ -1,0 +1,170 @@
+body {
+    /* padding: 20px; */
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.execution {
+    border: solid;
+    padding: 5px;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    display: flex;
+    align-items: baseline;
+
+    padding: 10px;
+    float: left;
+}
+
+label {
+    margin-top: 20px;
+}
+
+.search select {
+    display: flex;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.device-container label {
+	display: flex;
+}
+
+.device-container #serial-num-field {
+	width: 30%;
+}
+
+#insert-new-type, #insert-new-manu {
+    margin: 30px;
+}
+
+#serial-all-box {
+    display: flex;
+}
+
+#submit-button {
+    display: flex;
+    margin-top: 20px;
+    padding: 10px;
+
+    border-radius: 12px;
+    background-color: lightblue;
+    transition: style .3s ease-in-out; 
+}
+
+#reset-button {
+    margin-top: 20px;
+    padding: 10px;
+
+    border: black;
+    border-radius: 12px;
+    background-color: rgb(238, 106, 106); 
+}
+
+#back-to-search-button {
+    padding: 5px;
+
+    border: black;
+    border-radius: 12px;
+    background-color: rgba(221, 217, 217, 0.986)
+}
+
+#modify-button {
+    padding: 2px;
+    background-color: rgba(230, 200, 161, 0.986)
+}
+
+#delete-button {
+    padding: 2px;
+    background-color: rgb(252, 96, 96);
+}
+
+#table-header th {
+    display: table-cell;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.table-wrapper {
+    overflow:hidden;
+    overflow-y: scroll;
+	width: 800px;
+    height:500px;
+	margin: 0px auto;
+/* 	border: solid 1px black; */
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+	margin: 0px auto;
+}
+
+th {
+    border: thin solid;
+    background-color: lightgray;
+    padding: 5px;
+}
+
+tr {
+    border-bottom: 1px solid black;
+}
+
+tr:hover{
+	background-color: yellow;
+}
+
+td{
+    padding: 3px;
+}
+
+.pagination {
+    list-style-type: none;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	box-sizing: border-box;
+}
+.pagination li {
+    padding: 5px;
+}
+
+.pagination li a {
+	background-color: #e2e6e6;
+	padding: 8px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #616872;
+	border-radius: 4px;
+}
+
+.prev:hover a, .next:hover a {
+	background-color: yellow;
+}
+
+.goToPage {
+	text-align: center;
+	/* padding: 10px; */
+}
+
+.goToPage select {
+    padding: 5px;
+}
+
+.goToPage button {
+    padding: 5px;
+    /* border: solid black; */
+    border-radius: 12px;
+	background-color: rgba(221, 217, 217, 0.986)
+}
+
+.goToPage button:hover {
+	background-color: yellow;
+}

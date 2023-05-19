@@ -1,0 +1,47 @@
+body {
+    /* padding: 20px; */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    padding: 10px;
+    float: left;
+}
+
+.execution {
+    border: solid;
+    padding: 5px;
+}
+
+#back-to-search-button {
+    padding: 5px;
+
+    border: black;
+    border-radius: 12px;
+    background-color: rgba(221, 217, 217, 0.986)
+}
+
+table{
+    border-collapse: collapse;
+    width: 20%;
+    text-align: left;
+}
+
+th {
+    border: thin solid;
+    background-color: lightgray;
+    padding: 5px;
+}
+
+tr {
+    border-bottom: 1px solid black;
+}
+
+td{
+    padding: 3px;
+}

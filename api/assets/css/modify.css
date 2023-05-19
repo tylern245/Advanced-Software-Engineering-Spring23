@@ -1,0 +1,65 @@
+
+.alert {
+    padding: 20px;
+    
+    color: white;
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    background-color: green;
+}
+
+.alert-warning {
+    background-color: rgb(197, 128, 0);
+}
+
+.alert-failure {
+    background-color: red;
+}
+
+.loader {
+    border: 5px solid lightgray; 
+    border-top: 5px solid darkgray; 
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#add-button, #save-button, #cancel-button {
+    margin-top: 20px;
+}
+
+.container, .edit-container label {
+	display: flex;
+}
+
+.edit-container {
+    border: solid black 1px;
+}
+  
+  /* The close button */
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#modify-link {
+    padding: 5px;
+
+    border: black;
+    border-radius: 12px;
+    background-color: rgb(255, 200, 129);
+}
